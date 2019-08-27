@@ -1,0 +1,36 @@
+plugins {
+    id 'java-library'
+}
+
+group 'com.mugen'
+version '0.1.0'
+
+sourceCompatibility = JavaVersion.VERSION_11
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    implementation "io.reactivex.rxjava2:rxjava:${rxjava_version}"
+
+    implementation "com.google.code.gson:gson:${gson_version}"
+    implementation "com.squareup.retrofit2:retrofit:${retrofit_version}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${retrofit_version}"
+    implementation "com.squareup.retrofit2:converter-gson:${retrofit_version}"
+
+    compileOnly "org.projectlombok:lombok:${lombok_version}"
+    annotationProcessor "org.projectlombok:lombok:${lombok_version}"
+
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junit_jupiter_version}"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junit_jupiter_version}"
+
+    testCompile "org.assertj:assertj-core:${assertj_version}"
+    testCompile "org.mockito:mockito-core:${mockito_version}"
+
+}
+
+test {
+    useJUnitPlatform()
+}
