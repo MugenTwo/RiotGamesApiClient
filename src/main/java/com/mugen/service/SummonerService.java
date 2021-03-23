@@ -5,7 +5,11 @@ import com.mugen.api.SummonerApi;
 import com.mugen.model.Region;
 import com.mugen.model.Summoner;
 import io.reactivex.Single;
-import lombok.Value;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 import retrofit2.Retrofit;
 
 import java.util.Arrays;
@@ -14,11 +18,15 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-@Value
+@Builder
+@RequiredArgsConstructor
+@Getter
+@ToString
+@EqualsAndHashCode
 public class SummonerService {
 
-    private String apiKey;
-    private Map<Region, SummonerApi> summonerApiByRegion;
+    private final String apiKey;
+    private final Map<Region, SummonerApi> summonerApiByRegion;
 
     @lombok.experimental.Tolerate
     public SummonerService(RegionApiProvider regionApiProvider) {

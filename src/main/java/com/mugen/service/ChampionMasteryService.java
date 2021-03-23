@@ -5,7 +5,10 @@ import com.mugen.api.ChampionMasteryApi;
 import com.mugen.model.ChampionMastery;
 import com.mugen.model.Region;
 import io.reactivex.Single;
-import lombok.Value;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 import retrofit2.Retrofit;
 
 import java.util.Arrays;
@@ -15,11 +18,14 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-@Value
+@RequiredArgsConstructor
+@Getter
+@ToString
+@EqualsAndHashCode
 public class ChampionMasteryService {
 
-    private String apiKey;
-    private Map<Region, ChampionMasteryApi> championMasteryApiByRegion;
+    private final String apiKey;
+    private final Map<Region, ChampionMasteryApi> championMasteryApiByRegion;
 
     @lombok.experimental.Tolerate
     public ChampionMasteryService(RegionApiProvider regionApiProvider) {

@@ -7,14 +7,14 @@ import lombok.Value;
 @Value
 public class ChampionMastery {
 
-    private boolean chestGranted;
-    private int championLevel;
-    private int championPoints;
-    private long championId;
-    private long championPointsUntilNextLevel;
-    private long lastPlayTime;
-    private int tokensEarned;
-    private long championPointsSinceLastLevel;
-    private String summonerId;
+    boolean chestGranted;
+    int championLevel;
+    int championPoints;
+    long championId;
+    long championPointsUntilNextLevel;
+    long lastPlayTime;
+    int tokensEarned;
+    long championPointsSinceLastLevel;
+    String summonerId;
 
 }

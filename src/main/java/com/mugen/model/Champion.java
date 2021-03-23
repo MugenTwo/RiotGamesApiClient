@@ -9,8 +9,8 @@ import java.util.List;
 @Value
 public class Champion {
 
-    private List<Integer> freeChampionIdsForNewPlayers;
-    private List<Integer> freeChampionIds;
-    private int maxNewPlayerLevel;
+    List<Integer> freeChampionIdsForNewPlayers;
+    List<Integer> freeChampionIds;
+    int maxNewPlayerLevel;
 
 }

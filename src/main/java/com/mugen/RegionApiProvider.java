@@ -18,8 +18,8 @@ public class RegionApiProvider {
     private static final String PROTOCOL_URL = "https://";
     private static final String LEAGUE_OF_LEGENDS_API_URL = ".api.riotgames.com";
 
-    private String apiKey;
-    private Map<Region, Retrofit> retrofitByRegion;
+    String apiKey;
+    Map<Region, Retrofit> retrofitByRegion;
 
     public RegionApiProvider(String apiKey) {
         this.apiKey = apiKey;
