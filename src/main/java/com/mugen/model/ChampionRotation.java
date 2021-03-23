@@ -7,7 +7,7 @@ import java.util.List;
 
 @Builder(toBuilder = true)
 @Value
-public class Champion {
+public class ChampionRotation {
 
     List<Integer> freeChampionIdsForNewPlayers;
     List<Integer> freeChampionIds;

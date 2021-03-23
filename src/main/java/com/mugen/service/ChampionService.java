@@ -2,7 +2,7 @@ package com.mugen.service;
 
 import com.mugen.RegionApiProvider;
 import com.mugen.api.ChampionApi;
-import com.mugen.model.Champion;
+import com.mugen.model.ChampionRotation;
 import com.mugen.model.Region;
 import io.reactivex.Single;
 import lombok.EqualsAndHashCode;
@@ -43,7 +43,7 @@ public class ChampionService {
      * @param region to get info from
      * @return A Single containing the champion rotations
      */
-    public Single<Champion> getChampionRotations(Region region) {
+    public Single<ChampionRotation> getChampionRotations(Region region) {
         return this.championApiByRegion.get(region).getChampionRotations(this.apiKey);
     }
 

@@ -1,7 +1,9 @@
 package com.mugen;
 
 import com.mugen.model.Region;
-import lombok.Value;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -12,14 +14,16 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-@Value
+@Getter
+@ToString
+@EqualsAndHashCode
 public class RegionApiProvider {
 
     private static final String PROTOCOL_URL = "https://";
     private static final String LEAGUE_OF_LEGENDS_API_URL = ".api.riotgames.com";
 
-    String apiKey;
-    Map<Region, Retrofit> retrofitByRegion;
+    private final String apiKey;
+    private final Map<Region, Retrofit> retrofitByRegion;
 
     public RegionApiProvider(String apiKey) {
         this.apiKey = apiKey;

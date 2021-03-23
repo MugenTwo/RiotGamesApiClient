@@ -19,7 +19,6 @@ class ChampionMasteryServiceTest {
 
     @Test
     void getChampionMasteriesBySummonerTest() {
-        boolean chestGranted = false;
         int championLevel = 3;
         int championPoints = 15000;
         long championId = 92;
@@ -33,7 +32,6 @@ class ChampionMasteryServiceTest {
         ChampionMasteryApi championMasteryApi = mock(ChampionMasteryApi.class);
         championMasteryApiByRegion.put(Region.EUROPE_WEST, championMasteryApi);
         ChampionMastery championMastery = ChampionMastery.builder()
-                .chestGranted(chestGranted)
                 .championLevel(championLevel)
                 .championPoints(championPoints)
                 .championId(championId)
@@ -48,14 +46,17 @@ class ChampionMasteryServiceTest {
         Single<List<ChampionMastery>> result = championMasteryService.getChampionMasteriesBySummoner(encryptedSummonerId, Region.EUROPE_WEST);
         List<ChampionMastery> championMasteriesResult = result.blockingGet();
 
-        assertThat(championMasteriesResult.get(0).isChestGranted()).isFalse();
-        assertThat(championMasteriesResult.get(0).getChampionLevel()).isEqualTo(championLevel);
-        assertThat(championMasteriesResult.get(0).getChampionPoints()).isEqualTo(championPoints);
-        assertThat(championMasteriesResult.get(0).getChampionId()).isEqualTo(championId);
-        assertThat(championMasteriesResult.get(0).getChampionPointsUntilNextLevel()).isEqualTo(championPointsUntilNextLevel);
-        assertThat(championMasteriesResult.get(0).getLastPlayTime()).isEqualTo(lastPlayTime);
-        assertThat(championMasteriesResult.get(0).getTokensEarned()).isEqualTo(tokensEarned);
-        assertThat(championMasteriesResult.get(0).getChampionPointsSinceLastLevel()).isEqualTo(championPointsSinceLastLevel);
+        assertThat(championMasteriesResult).isEqualTo(List.of(
+                ChampionMastery.builder()
+                        .championLevel(championLevel)
+                        .championPoints(championPoints)
+                        .championId(championId)
+                        .championPointsUntilNextLevel(championPointsUntilNextLevel)
+                        .lastPlayTime(lastPlayTime)
+                        .tokensEarned(tokensEarned)
+                        .championPointsSinceLastLevel(championPointsSinceLastLevel)
+                        .build()
+        ));
     }
 
     @Test
@@ -89,14 +90,17 @@ class ChampionMasteryServiceTest {
         Single<ChampionMastery> result = championMasteryService.getChampionMasteryBySummoner(encryptedSummonerId, Long.toString(championId), Region.EUROPE_WEST);
         ChampionMastery championMasteryResult = result.blockingGet();
 
-        assertThat(championMasteryResult.isChestGranted()).isFalse();
-        assertThat(championMasteryResult.getChampionLevel()).isEqualTo(championLevel);
-        assertThat(championMasteryResult.getChampionPoints()).isEqualTo(championPoints);
-        assertThat(championMasteryResult.getChampionId()).isEqualTo(championId);
-        assertThat(championMasteryResult.getChampionPointsUntilNextLevel()).isEqualTo(championPointsUntilNextLevel);
-        assertThat(championMasteryResult.getLastPlayTime()).isEqualTo(lastPlayTime);
-        assertThat(championMasteryResult.getTokensEarned()).isEqualTo(tokensEarned);
-        assertThat(championMasteryResult.getChampionPointsSinceLastLevel()).isEqualTo(championPointsSinceLastLevel);
+        assertThat(championMasteryResult).isEqualTo(
+                ChampionMastery.builder()
+                        .championLevel(championLevel)
+                        .championPoints(championPoints)
+                        .championId(championId)
+                        .championPointsUntilNextLevel(championPointsUntilNextLevel)
+                        .lastPlayTime(lastPlayTime)
+                        .tokensEarned(tokensEarned)
+                        .championPointsSinceLastLevel(championPointsSinceLastLevel)
+                        .build()
+        );
     }
 
     @Test

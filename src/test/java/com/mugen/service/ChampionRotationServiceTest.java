@@ -1,7 +1,7 @@
 package com.mugen.service;
 
 import com.mugen.api.ChampionApi;
-import com.mugen.model.Champion;
+import com.mugen.model.ChampionRotation;
 import com.mugen.model.Region;
 import io.reactivex.Single;
 import org.junit.jupiter.api.Test;
@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class ChampionServiceTest {
+class ChampionRotationServiceTest {
 
     @Test
     void getChampionRotationsTest() {
@@ -25,20 +25,24 @@ class ChampionServiceTest {
         Map<Region, ChampionApi> championApiByRegion = new HashMap<>();
         ChampionApi championApi = mock(ChampionApi.class);
         championApiByRegion.put(Region.EUROPE_WEST, championApi);
-        Champion champion = Champion.builder()
+        ChampionRotation championRotation = ChampionRotation.builder()
                 .freeChampionIdsForNewPlayers(freeChampionIdsForNewPlayers)
                 .freeChampionIds(freeChampionIds)
                 .maxNewPlayerLevel(maxNewPlayerLevel)
                 .build();
-        when(championApi.getChampionRotations(apiKey)).thenReturn(Single.just(champion));
+        when(championApi.getChampionRotations(apiKey)).thenReturn(Single.just(championRotation));
         ChampionService championService = new ChampionService(apiKey, championApiByRegion);
 
-        Single<Champion> result = championService.getChampionRotations(Region.EUROPE_WEST);
-        Champion championResult = result.blockingGet();
+        Single<ChampionRotation> result = championService.getChampionRotations(Region.EUROPE_WEST);
+        ChampionRotation championRotationResult = result.blockingGet();
 
-        assertThat(championResult.getFreeChampionIdsForNewPlayers()).isEqualTo(freeChampionIdsForNewPlayers);
-        assertThat(championResult.getFreeChampionIds()).isEqualTo(freeChampionIds);
-        assertThat(championResult.getMaxNewPlayerLevel()).isEqualTo(maxNewPlayerLevel);
+        assertThat(championRotationResult).isEqualTo(
+                ChampionRotation.builder()
+                        .freeChampionIdsForNewPlayers(freeChampionIdsForNewPlayers)
+                        .freeChampionIds(freeChampionIds)
+                        .maxNewPlayerLevel(maxNewPlayerLevel)
+                        .build()
+        );
     }
 
 }
