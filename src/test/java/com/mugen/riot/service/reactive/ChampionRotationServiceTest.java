@@ -1,8 +1,9 @@
-package com.mugen.service;
+package com.mugen.riot.service.reactive;
 
-import com.mugen.api.ChampionApi;
-import com.mugen.model.ChampionRotation;
-import com.mugen.model.Region;
+import com.mugen.riot.api.reactive.ChampionApi;
+import com.mugen.riot.model.ChampionRotation;
+import com.mugen.riot.model.Region;
+import com.mugen.riot.service.reactive.ChampionService;
 import io.reactivex.Single;
 import org.junit.jupiter.api.Test;
 

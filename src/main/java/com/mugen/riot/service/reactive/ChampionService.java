@@ -1,9 +1,9 @@
-package com.mugen.service;
+package com.mugen.riot.service.reactive;
 
-import com.mugen.RegionApiProvider;
-import com.mugen.api.ChampionApi;
-import com.mugen.model.ChampionRotation;
-import com.mugen.model.Region;
+import com.mugen.riot.RegionApiProvider;
+import com.mugen.riot.api.reactive.ChampionApi;
+import com.mugen.riot.model.ChampionRotation;
+import com.mugen.riot.model.Region;
 import io.reactivex.Single;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

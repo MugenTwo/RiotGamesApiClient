@@ -1,6 +1,6 @@
-package com.mugen.api;
+package com.mugen.riot.api.reactive;
 
-import com.mugen.model.ChampionRotation;
+import com.mugen.riot.model.ChampionRotation;
 import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
