@@ -1,13 +1,11 @@
-package com.mugen.riot.service.reactive;
+package com.mugen.riot.service;
 
 import com.mugen.riot.RegionApiProvider;
-import com.mugen.riot.api.reactive.SummonerApi;
+import com.mugen.riot.api.SummonerApi;
 import com.mugen.riot.model.Region;
 import com.mugen.riot.model.Summoner;
 import io.reactivex.Single;
-import lombok.Builder;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import retrofit2.Retrofit;
@@ -18,9 +16,7 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-@Builder
 @RequiredArgsConstructor
-@Getter
 @ToString
 @EqualsAndHashCode
 public class SummonerService {

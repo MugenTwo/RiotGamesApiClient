@@ -1,4 +1,4 @@
-package com.mugen.riot.api.reactive;
+package com.mugen.riot.api;
 
 import com.mugen.riot.model.Summoner;
 import io.reactivex.Single;

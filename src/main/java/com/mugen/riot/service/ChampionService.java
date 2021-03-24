@@ -1,12 +1,11 @@
-package com.mugen.riot.service.reactive;
+package com.mugen.riot.service;
 
 import com.mugen.riot.RegionApiProvider;
-import com.mugen.riot.api.reactive.ChampionApi;
+import com.mugen.riot.api.ChampionApi;
 import com.mugen.riot.model.ChampionRotation;
 import com.mugen.riot.model.Region;
 import io.reactivex.Single;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import retrofit2.Retrofit;
@@ -18,7 +17,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
-@Getter
 @ToString
 @EqualsAndHashCode
 public class ChampionService {

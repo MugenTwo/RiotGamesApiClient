@@ -1,9 +1,8 @@
-package com.mugen.riot.service.reactive;
+package com.mugen.riot.service;
 
-import com.mugen.riot.api.reactive.SummonerApi;
+import com.mugen.riot.api.SummonerApi;
 import com.mugen.riot.model.Region;
 import com.mugen.riot.model.Summoner;
-import com.mugen.riot.service.reactive.SummonerService;
 import io.reactivex.Single;
 import org.junit.jupiter.api.Test;
 

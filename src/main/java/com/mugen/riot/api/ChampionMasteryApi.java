@@ -1,4 +1,4 @@
-package com.mugen.riot.api.reactive;
+package com.mugen.riot.api;
 
 import com.mugen.riot.model.ChampionMastery;
 import io.reactivex.Single;

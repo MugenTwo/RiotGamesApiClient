@@ -1,9 +1,8 @@
-package com.mugen.riot.service.reactive;
+package com.mugen.riot.service;
 
-import com.mugen.riot.api.reactive.ChampionMasteryApi;
+import com.mugen.riot.api.ChampionMasteryApi;
 import com.mugen.riot.model.ChampionMastery;
 import com.mugen.riot.model.Region;
-import com.mugen.riot.service.reactive.ChampionMasteryService;
 import io.reactivex.Single;
 import org.junit.jupiter.api.Test;
 
