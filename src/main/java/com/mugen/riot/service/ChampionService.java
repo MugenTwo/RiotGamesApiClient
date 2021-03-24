@@ -8,13 +8,8 @@ import io.reactivex.Single;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
-import retrofit2.Retrofit;
 
-import java.util.Arrays;
-import java.util.EnumMap;
 import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @ToString
@@ -26,13 +21,8 @@ public class ChampionService {
 
     @lombok.experimental.Tolerate
     public ChampionService(RegionApiProvider regionApiProvider) {
-        Map<Region, Retrofit> retrofitByRegion = regionApiProvider.getRetrofitByRegion();
         this.apiKey = regionApiProvider.getApiKey();
-        this.championApiByRegion = Arrays.stream(Region.values())
-                .collect(Collectors.toMap(
-                        Function.identity(), region -> retrofitByRegion.get(region).create(ChampionApi.class),
-                        (region1, region2) -> region1, () -> new EnumMap<>(Region.class)
-                ));
+        this.championApiByRegion = regionApiProvider.generateApiByRegion(ChampionApi.class);
     }
 
     /**

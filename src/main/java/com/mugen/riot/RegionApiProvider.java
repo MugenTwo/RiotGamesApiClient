@@ -14,7 +14,6 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-@Getter
 @ToString
 @EqualsAndHashCode
 public class RegionApiProvider {
@@ -22,6 +21,7 @@ public class RegionApiProvider {
     private static final String PROTOCOL_URL = "https://";
     private static final String LEAGUE_OF_LEGENDS_API_URL = ".api.riotgames.com";
 
+    @Getter
     private final String apiKey;
     private final Map<Region, Retrofit> retrofitByRegion;
 
@@ -30,6 +30,14 @@ public class RegionApiProvider {
         this.retrofitByRegion = Arrays.stream(Region.values())
                 .collect(Collectors.toMap(
                         Function.identity(), this::buildRetrofit,
+                        (region1, region2) -> region1, () -> new EnumMap<>(Region.class)
+                ));
+    }
+
+    public <T> Map<Region, T> generateApiByRegion(Class<T> tClass) {
+        return Arrays.stream(Region.values())
+                .collect(Collectors.toMap(
+                        Function.identity(), region -> this.retrofitByRegion.get(region).create(tClass),
                         (region1, region2) -> region1, () -> new EnumMap<>(Region.class)
                 ));
     }
