@@ -20,7 +20,6 @@ public class ChampionMasteryService {
     private final String apiKey;
     private final Map<Region, ChampionMasteryApi> championMasteryApiByRegion;
 
-    @lombok.experimental.Tolerate
     public ChampionMasteryService(RegionApiProvider regionApiProvider) {
         this.apiKey = regionApiProvider.getApiKey();
         this.championMasteryApiByRegion = regionApiProvider.generateApiByRegion(ChampionMasteryApi.class);

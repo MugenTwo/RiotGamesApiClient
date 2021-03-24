@@ -19,7 +19,6 @@ public class SummonerService {
     private final String apiKey;
     private final Map<Region, SummonerApi> summonerApiByRegion;
 
-    @lombok.experimental.Tolerate
     public SummonerService(RegionApiProvider regionApiProvider) {
         this.apiKey = regionApiProvider.getApiKey();
         this.summonerApiByRegion = regionApiProvider.generateApiByRegion(SummonerApi.class);
