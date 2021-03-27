@@ -3,7 +3,7 @@ package com.mugen.riot.service;
 import com.mugen.riot.api.ChampionMasteryApi;
 import com.mugen.riot.model.ChampionMastery;
 import com.mugen.riot.Region;
-import io.reactivex.Single;
+import io.reactivex.Observable;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
@@ -40,11 +40,13 @@ class ChampionMasteryServiceTest {
                 .tokensEarned(tokensEarned)
                 .championPointsSinceLastLevel(championPointsSinceLastLevel)
                 .build();
-        when(championMasteryApi.getChampionMasteriesBySummoner(encryptedSummonerId, apiKey)).thenReturn(Single.just(Collections.singletonList(championMastery)));
+        when(championMasteryApi.getChampionMasteriesBySummoner(encryptedSummonerId, apiKey)).thenReturn(Observable.just(Collections.singletonList(championMastery)));
         ChampionMasteryService championMasteryService = new ChampionMasteryService(apiKey, championMasteryApiByRegion);
 
-        Single<List<ChampionMastery>> result = championMasteryService.getChampionMasteriesBySummoner(encryptedSummonerId, Region.EUROPE_WEST);
-        List<ChampionMastery> championMasteriesResult = result.blockingGet();
+        Observable<List<ChampionMastery>> result = Observable.fromPublisher(
+                championMasteryService.getChampionMasteriesBySummoner(encryptedSummonerId, Region.EUROPE_WEST)
+        );
+        List<ChampionMastery> championMasteriesResult = result.blockingFirst();
 
         assertThat(championMasteriesResult).isEqualTo(List.of(
                 ChampionMastery.builder()
@@ -84,11 +86,13 @@ class ChampionMasteryServiceTest {
                 .tokensEarned(tokensEarned)
                 .championPointsSinceLastLevel(championPointsSinceLastLevel)
                 .build();
-        when(championMasteryApi.getChampionMasteryBySummoner(encryptedSummonerId, Long.toString(championId), apiKey)).thenReturn(Single.just(championMastery));
+        when(championMasteryApi.getChampionMasteryBySummoner(encryptedSummonerId, Long.toString(championId), apiKey)).thenReturn(Observable.just(championMastery));
         ChampionMasteryService championMasteryService = new ChampionMasteryService(apiKey, championMasteryApiByRegion);
 
-        Single<ChampionMastery> result = championMasteryService.getChampionMasteryBySummoner(encryptedSummonerId, Long.toString(championId), Region.EUROPE_WEST);
-        ChampionMastery championMasteryResult = result.blockingGet();
+        Observable<ChampionMastery> result = Observable.fromPublisher(
+                championMasteryService.getChampionMasteryBySummoner(encryptedSummonerId, Long.toString(championId), Region.EUROPE_WEST)
+        );
+        ChampionMastery championMasteryResult = result.blockingFirst();
 
         assertThat(championMasteryResult).isEqualTo(
                 ChampionMastery.builder()
@@ -111,11 +115,13 @@ class ChampionMasteryServiceTest {
         Map<Region, ChampionMasteryApi> championMasteryApiByRegion = new HashMap<>();
         ChampionMasteryApi championMasteryApi = mock(ChampionMasteryApi.class);
         championMasteryApiByRegion.put(Region.EUROPE_WEST, championMasteryApi);
-        when(championMasteryApi.getChampionMasteryScoreBySummoner(encryptedSummonerId, apiKey)).thenReturn(Single.just(score));
+        when(championMasteryApi.getChampionMasteryScoreBySummoner(encryptedSummonerId, apiKey)).thenReturn(Observable.just(score));
         ChampionMasteryService championMasteryService = new ChampionMasteryService(apiKey, championMasteryApiByRegion);
 
-        Single<Integer> result = championMasteryService.getChampionMasteryScoreBySummoner(encryptedSummonerId, Region.EUROPE_WEST);
-        Integer scoreResult = result.blockingGet();
+        Observable<Integer> result = Observable.fromPublisher(
+                championMasteryService.getChampionMasteryScoreBySummoner(encryptedSummonerId, Region.EUROPE_WEST)
+        );
+        Integer scoreResult = result.blockingFirst();
 
         assertThat(scoreResult).isEqualTo(score);
     }

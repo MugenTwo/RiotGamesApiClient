@@ -3,7 +3,7 @@ package com.mugen.riot.service;
 import com.mugen.riot.api.ChampionApi;
 import com.mugen.riot.model.ChampionRotation;
 import com.mugen.riot.Region;
-import io.reactivex.Single;
+import io.reactivex.Observable;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -30,11 +30,11 @@ class ChampionRotationServiceTest {
                 .freeChampionIds(freeChampionIds)
                 .maxNewPlayerLevel(maxNewPlayerLevel)
                 .build();
-        when(championApi.getChampionRotations(apiKey)).thenReturn(Single.just(championRotation));
+        when(championApi.getChampionRotations(apiKey)).thenReturn(Observable.just(championRotation));
         ChampionService championService = new ChampionService(apiKey, championApiByRegion);
 
-        Single<ChampionRotation> result = championService.getChampionRotations(Region.EUROPE_WEST);
-        ChampionRotation championRotationResult = result.blockingGet();
+        Observable<ChampionRotation> result = Observable.fromPublisher(championService.getChampionRotations(Region.EUROPE_WEST));
+        ChampionRotation championRotationResult = result.blockingFirst();
 
         assertThat(championRotationResult).isEqualTo(
                 ChampionRotation.builder()

@@ -4,10 +4,11 @@ import com.mugen.riot.RegionApiProvider;
 import com.mugen.riot.api.ChampionMasteryApi;
 import com.mugen.riot.model.ChampionMastery;
 import com.mugen.riot.Region;
-import io.reactivex.Single;
+import io.reactivex.BackpressureStrategy;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
+import org.reactivestreams.Publisher;
 
 import java.util.List;
 import java.util.Map;
@@ -30,10 +31,11 @@ public class ChampionMasteryService {
      *
      * @param encryptedSummonerId of the Summoner
      * @param region              to get info from
-     * @return A Single containing all the ChampionMastery of a Summoner
+     * @return A Publisher containing all the ChampionMastery of a Summoner
      */
-    public Single<List<ChampionMastery>> getChampionMasteriesBySummoner(String encryptedSummonerId, Region region) {
-        return this.championMasteryApiByRegion.get(region).getChampionMasteriesBySummoner(encryptedSummonerId, this.apiKey);
+    public Publisher<List<ChampionMastery>> getChampionMasteriesBySummoner(String encryptedSummonerId, Region region) {
+        return this.championMasteryApiByRegion.get(region).getChampionMasteriesBySummoner(encryptedSummonerId, this.apiKey)
+                .toFlowable(BackpressureStrategy.BUFFER);
     }
 
     /**
@@ -42,10 +44,11 @@ public class ChampionMasteryService {
      * @param encryptedSummonerId of the Summoner
      * @param championId          of the Champion
      * @param region              to get info from
-     * @return A Single containing the Summoner's ChampionMastery over the specified Champion
+     * @return A Publisher containing the Summoner's ChampionMastery over the specified Champion
      */
-    public Single<ChampionMastery> getChampionMasteryBySummoner(String encryptedSummonerId, String championId, Region region) {
-        return this.championMasteryApiByRegion.get(region).getChampionMasteryBySummoner(encryptedSummonerId, championId, this.apiKey);
+    public Publisher<ChampionMastery> getChampionMasteryBySummoner(String encryptedSummonerId, String championId, Region region) {
+        return this.championMasteryApiByRegion.get(region).getChampionMasteryBySummoner(encryptedSummonerId, championId, this.apiKey)
+                .toFlowable(BackpressureStrategy.BUFFER);
     }
 
     /**
@@ -53,10 +56,11 @@ public class ChampionMasteryService {
      *
      * @param encryptedSummonerId of the Summoner
      * @param region              to get info from
-     * @return A Single containing the Summoner's total ChampionMastery score
+     * @return A Publisher containing the Summoner's total ChampionMastery score
      */
-    public Single<Integer> getChampionMasteryScoreBySummoner(String encryptedSummonerId, Region region) {
-        return this.championMasteryApiByRegion.get(region).getChampionMasteryScoreBySummoner(encryptedSummonerId, this.apiKey);
+    public Publisher<Integer> getChampionMasteryScoreBySummoner(String encryptedSummonerId, Region region) {
+        return this.championMasteryApiByRegion.get(region).getChampionMasteryScoreBySummoner(encryptedSummonerId, this.apiKey)
+                .toFlowable(BackpressureStrategy.BUFFER);
     }
 
 }

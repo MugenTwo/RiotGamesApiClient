@@ -4,10 +4,11 @@ import com.mugen.riot.RegionApiProvider;
 import com.mugen.riot.api.SummonerApi;
 import com.mugen.riot.Region;
 import com.mugen.riot.model.Summoner;
-import io.reactivex.Single;
+import io.reactivex.BackpressureStrategy;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
+import org.reactivestreams.Publisher;
 
 import java.util.Map;
 
@@ -29,10 +30,10 @@ public class SummonerService {
      *
      * @param name   of the Summoner
      * @param region to search in
-     * @return A Single containing a Summoner with the provided name
+     * @return A Publisher containing a Summoner with the provided name
      */
-    public Single<Summoner> findByName(String name, Region region) {
-        return this.summonerApiByRegion.get(region).findByName(name, this.apiKey);
+    public Publisher<Summoner> findByName(String name, Region region) {
+        return this.summonerApiByRegion.get(region).findByName(name, this.apiKey).toFlowable(BackpressureStrategy.BUFFER);
     }
 
     /**
@@ -40,10 +41,11 @@ public class SummonerService {
      *
      * @param encryptedAccountId of the Summoner
      * @param region             to search in
-     * @return A Single containing a Summoner with the provided encryptedAccountId
+     * @return A Publisher containing a Summoner with the provided encryptedAccountId
      */
-    public Single<Summoner> findByEncryptedAccountId(String encryptedAccountId, Region region) {
-        return this.summonerApiByRegion.get(region).findByEncryptedAccountId(encryptedAccountId, this.apiKey);
+    public Publisher<Summoner> findByEncryptedAccountId(String encryptedAccountId, Region region) {
+        return this.summonerApiByRegion.get(region).findByEncryptedAccountId(encryptedAccountId, this.apiKey)
+                .toFlowable(BackpressureStrategy.BUFFER);
     }
 
     /**
@@ -51,10 +53,11 @@ public class SummonerService {
      *
      * @param encryptedPuuid of the Summoner
      * @param region         to search in
-     * @return A Single containing a Summoner with the provided encryptedPuuid
+     * @return A Publisher containing a Summoner with the provided encryptedPuuid
      */
-    public Single<Summoner> findByEncryptedPuuid(String encryptedPuuid, Region region) {
-        return this.summonerApiByRegion.get(region).findByEncryptedPuuid(encryptedPuuid, this.apiKey);
+    public Publisher<Summoner> findByEncryptedPuuid(String encryptedPuuid, Region region) {
+        return this.summonerApiByRegion.get(region).findByEncryptedPuuid(encryptedPuuid, this.apiKey)
+                .toFlowable(BackpressureStrategy.BUFFER);
     }
 
     /**
@@ -62,10 +65,11 @@ public class SummonerService {
      *
      * @param encryptedSummonerId of the Summoner
      * @param region              to search in
-     * @return A Single containing a Summoner with the provided encryptedSummonerId
+     * @return A Publisher containing a Summoner with the provided encryptedSummonerId
      */
-    public Single<Summoner> findByEncryptedSummonerId(String encryptedSummonerId, Region region) {
-        return this.summonerApiByRegion.get(region).findByEncryptedSummonerId(encryptedSummonerId, this.apiKey);
+    public Publisher<Summoner> findByEncryptedSummonerId(String encryptedSummonerId, Region region) {
+        return this.summonerApiByRegion.get(region).findByEncryptedSummonerId(encryptedSummonerId, this.apiKey)
+                .toFlowable(BackpressureStrategy.BUFFER);
     }
 
 }

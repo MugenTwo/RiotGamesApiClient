@@ -4,10 +4,11 @@ import com.mugen.riot.RegionApiProvider;
 import com.mugen.riot.api.ChampionApi;
 import com.mugen.riot.model.ChampionRotation;
 import com.mugen.riot.Region;
-import io.reactivex.Single;
+import io.reactivex.BackpressureStrategy;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
+import org.reactivestreams.Publisher;
 
 import java.util.Map;
 
@@ -28,10 +29,10 @@ public class ChampionService {
      * Calls League of Legends API to get the champion rotations, including free-to-play and low-level free-to-play rotations
      *
      * @param region to get info from
-     * @return A Single containing the champion rotations
+     * @return A Observable containing the champion rotations
      */
-    public Single<ChampionRotation> getChampionRotations(Region region) {
-        return this.championApiByRegion.get(region).getChampionRotations(this.apiKey);
+    public Publisher<ChampionRotation> getChampionRotations(Region region) {
+        return this.championApiByRegion.get(region).getChampionRotations(this.apiKey).toFlowable(BackpressureStrategy.BUFFER);
     }
 
 }

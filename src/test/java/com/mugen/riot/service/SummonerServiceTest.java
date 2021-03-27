@@ -3,7 +3,7 @@ package com.mugen.riot.service;
 import com.mugen.riot.api.SummonerApi;
 import com.mugen.riot.Region;
 import com.mugen.riot.model.Summoner;
-import io.reactivex.Single;
+import io.reactivex.Observable;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -25,11 +25,11 @@ class SummonerServiceTest {
         Summoner summoner = Summoner.builder()
                 .name(summonerName)
                 .build();
-        when(summonerApi.findByName(summonerName, apiKey)).thenReturn(Single.just(summoner));
+        when(summonerApi.findByName(summonerName, apiKey)).thenReturn(Observable.just(summoner));
         SummonerService summonerService = new SummonerService(apiKey, summonerApiByRegion);
 
-        Single<Summoner> result = summonerService.findByName(summonerName, Region.EUROPE_WEST);
-        Summoner summonerResult = result.blockingGet();
+        Observable<Summoner> result = Observable.fromPublisher(summonerService.findByName(summonerName, Region.EUROPE_WEST));
+        Summoner summonerResult = result.blockingFirst();
 
         assertThat(summonerResult.getName()).isEqualToIgnoringCase(summonerName);
     }
@@ -44,11 +44,11 @@ class SummonerServiceTest {
         Summoner summoner = Summoner.builder()
                 .accountId(encryptedAccountId)
                 .build();
-        when(summonerApi.findByEncryptedAccountId(encryptedAccountId, apiKey)).thenReturn(Single.just(summoner));
+        when(summonerApi.findByEncryptedAccountId(encryptedAccountId, apiKey)).thenReturn(Observable.just(summoner));
         SummonerService summonerService = new SummonerService(apiKey, summonerApiByRegion);
 
-        Single<Summoner> result = summonerService.findByEncryptedAccountId(encryptedAccountId, Region.EUROPE_WEST);
-        Summoner summonerResult = result.blockingGet();
+        Observable<Summoner> result = Observable.fromPublisher(summonerService.findByEncryptedAccountId(encryptedAccountId, Region.EUROPE_WEST));
+        Summoner summonerResult = result.blockingFirst();
 
         assertThat(summonerResult.getAccountId()).isEqualTo(encryptedAccountId);
     }
@@ -63,11 +63,11 @@ class SummonerServiceTest {
         Summoner summoner = Summoner.builder()
                 .puuid(encryptedPuuid)
                 .build();
-        when(summonerApi.findByEncryptedPuuid(encryptedPuuid, apiKey)).thenReturn(Single.just(summoner));
+        when(summonerApi.findByEncryptedPuuid(encryptedPuuid, apiKey)).thenReturn(Observable.just(summoner));
         SummonerService summonerService = new SummonerService(apiKey, summonerApiByRegion);
 
-        Single<Summoner> result = summonerService.findByEncryptedPuuid(encryptedPuuid, Region.EUROPE_WEST);
-        Summoner summonerResult = result.blockingGet();
+        Observable<Summoner> result = Observable.fromPublisher(summonerService.findByEncryptedPuuid(encryptedPuuid, Region.EUROPE_WEST));
+        Summoner summonerResult = result.blockingFirst();
 
         assertThat(summonerResult.getPuuid()).isEqualTo(encryptedPuuid);
     }
@@ -82,11 +82,11 @@ class SummonerServiceTest {
         Summoner summoner = Summoner.builder()
                 .id(encryptedSummonerId)
                 .build();
-        when(summonerApi.findByEncryptedSummonerId(encryptedSummonerId, apiKey)).thenReturn(Single.just(summoner));
+        when(summonerApi.findByEncryptedSummonerId(encryptedSummonerId, apiKey)).thenReturn(Observable.just(summoner));
         SummonerService summonerService = new SummonerService(apiKey, summonerApiByRegion);
 
-        Single<Summoner> result = summonerService.findByEncryptedSummonerId(encryptedSummonerId, Region.EUROPE_WEST);
-        Summoner summonerResult = result.blockingGet();
+        Observable<Summoner> result = Observable.fromPublisher(summonerService.findByEncryptedSummonerId(encryptedSummonerId, Region.EUROPE_WEST));
+        Summoner summonerResult = result.blockingFirst();
 
         assertThat(summonerResult.getId()).isEqualTo(encryptedSummonerId);
     }
