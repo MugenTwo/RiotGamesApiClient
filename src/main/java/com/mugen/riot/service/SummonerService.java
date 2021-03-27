@@ -2,7 +2,7 @@ package com.mugen.riot.service;
 
 import com.mugen.riot.RegionApiProvider;
 import com.mugen.riot.api.SummonerApi;
-import com.mugen.riot.model.Region;
+import com.mugen.riot.Region;
 import com.mugen.riot.model.Summoner;
 import io.reactivex.Single;
 import lombok.EqualsAndHashCode;

@@ -1,6 +1,5 @@
 package com.mugen.riot;
 
-import com.mugen.riot.model.Region;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;

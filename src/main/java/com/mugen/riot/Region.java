@@ -1,4 +1,4 @@
-package com.mugen.riot.model;
+package com.mugen.riot;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

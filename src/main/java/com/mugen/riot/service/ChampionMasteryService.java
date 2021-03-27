@@ -3,7 +3,7 @@ package com.mugen.riot.service;
 import com.mugen.riot.RegionApiProvider;
 import com.mugen.riot.api.ChampionMasteryApi;
 import com.mugen.riot.model.ChampionMastery;
-import com.mugen.riot.model.Region;
+import com.mugen.riot.Region;
 import io.reactivex.Single;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
