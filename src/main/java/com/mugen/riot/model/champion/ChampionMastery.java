@@ -1,4 +1,4 @@
-package com.mugen.riot.model;
+package com.mugen.riot.model.champion;
 
 import lombok.Builder;
 import lombok.Value;
