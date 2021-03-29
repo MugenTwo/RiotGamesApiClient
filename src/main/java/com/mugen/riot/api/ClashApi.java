@@ -14,7 +14,7 @@ public interface ClashApi {
     @GET("/lol/clash/v1/players/by-summoner/{summonerId}")
     Observable<List<Player>> getPlayerBySummonerId(@Path("summonerId") String summonerId);
 
-    @GET("/lol/clash/v1/teams/{teamId}}")
+    @GET("/lol/clash/v1/teams/{teamId}")
     Observable<ClashTeam> getTeam(@Path("teamId") String teamId);
 
     @GET("/lol/clash/v1/tournaments")
