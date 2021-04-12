@@ -1,5 +1,9 @@
 package com.mugen.riot;
 
+import com.mugen.riot.route.Continent;
+import com.mugen.riot.route.Region;
+import com.mugen.riot.route.Route;
+import com.mugen.riot.service.AccountService;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
@@ -9,47 +13,45 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.util.Arrays;
-import java.util.EnumMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @ToString
 @EqualsAndHashCode
-public class RegionApiProvider {
+public class RiotApiProvider {
 
     private static final String PROTOCOL_URL = "https://";
     private static final String LEAGUE_OF_LEGENDS_API_URL = ".api.riotgames.com";
+    private static final Set<Class<?>> continentApis = Set.of(AccountService.class);
 
     @Getter
     @ToString.Exclude
     private final String apiKey;
     private final OkHttpClient okHttpClient;
-    private final Map<Region, Retrofit> retrofitByRegion;
+    private final Map<Route, Retrofit> retrofitByRoute;
 
-    public RegionApiProvider(String apiKey) {
+    public RiotApiProvider(String apiKey) {
         this.apiKey = apiKey;
         this.okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(new RiotApiHeaderInterceptor(apiKey))
                 .build();
-        this.retrofitByRegion = Arrays.stream(Region.values())
-                .collect(Collectors.toMap(
-                        Function.identity(), this::buildRetrofit,
-                        (region1, region2) -> region1, () -> new EnumMap<>(Region.class)
-                ));
+        this.retrofitByRoute = Stream.concat(Arrays.stream(Region.values()), Arrays.stream(Continent.values()))
+                .collect(Collectors.toMap(Function.identity(), route -> buildRetrofit(route.getPath())));
     }
 
-    public <T> Map<Region, T> generateApiByRegion(Class<T> api) {
-        return Arrays.stream(Region.values())
-                .collect(Collectors.toMap(
-                        Function.identity(), region -> this.retrofitByRegion.get(region).create(api),
-                        (region1, region2) -> region1, () -> new EnumMap<>(Region.class)
-                ));
+    public <T> Map<Route, T> generateApi(Class<T> api) {
+        Class<? extends Route> routeClass = continentApis.contains(api) ? Continent.class : Region.class;
+
+        return Arrays.stream(routeClass.getEnumConstants())
+                .collect(Collectors.toMap(Function.identity(), route -> this.retrofitByRoute.get(route).create(api)));
     }
 
-    private Retrofit buildRetrofit(Region region) {
+    private Retrofit buildRetrofit(String path) {
         return new Retrofit.Builder()
-                .baseUrl(PROTOCOL_URL + region.getAcronym() + LEAGUE_OF_LEGENDS_API_URL)
+                .baseUrl(PROTOCOL_URL + path + LEAGUE_OF_LEGENDS_API_URL)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

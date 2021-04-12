@@ -1,11 +1,11 @@
-package com.mugen.riot;
+package com.mugen.riot.route;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-public enum Region {
+public enum Region implements Route {
 
     RUSSIA("ru"),
     KOREA("kr"),
@@ -19,6 +19,6 @@ public enum Region {
     LATIN_AMERICA_NORTH("la1"),
     LATIN_AMERICA_SOUTH("la2");
 
-    private final String acronym;
+    private final String path;
 
 }

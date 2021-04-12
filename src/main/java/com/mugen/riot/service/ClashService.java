@@ -1,4 +1,4 @@
-package com.mugen.riot.api;
+package com.mugen.riot.service;
 
 import com.mugen.riot.model.clash.ClashTeam;
 import com.mugen.riot.model.Player;
@@ -9,7 +9,7 @@ import retrofit2.http.Path;
 
 import java.util.List;
 
-public interface ClashApi {
+public interface ClashService {
 
     @GET("/lol/clash/v1/players/by-summoner/{summonerId}")
     Observable<List<Player>> getPlayerBySummonerId(@Path("summonerId") String summonerId);

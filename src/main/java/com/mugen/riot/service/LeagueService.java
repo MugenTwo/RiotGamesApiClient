@@ -1,4 +1,4 @@
-package com.mugen.riot.api;
+package com.mugen.riot.service;
 
 import com.mugen.riot.model.league.LeagueEntry;
 import com.mugen.riot.model.league.LeagueList;
@@ -6,7 +6,7 @@ import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
-public interface LeagueApi {
+public interface LeagueService {
 
     @GET("/lol/league/v4/challengerleagues/by-queue/{queue}")
     Observable<LeagueList> getChallengerLeaguesByQueue(@Path("queue") String queue);

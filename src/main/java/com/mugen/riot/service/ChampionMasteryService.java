@@ -1,4 +1,4 @@
-package com.mugen.riot.api;
+package com.mugen.riot.service;
 
 import com.mugen.riot.model.champion.ChampionMastery;
 import io.reactivex.Observable;
@@ -7,7 +7,7 @@ import retrofit2.http.Path;
 
 import java.util.List;
 
-public interface ChampionMasteryApi {
+public interface ChampionMasteryService {
 
     @GET("/lol/champion-mastery/v4/champion-masteries/by-summoner/{encryptedSummonerId}")
     Observable<List<ChampionMastery>> getChampionMasteriesBySummoner(@Path("encryptedSummonerId") String encryptedSummonerId);

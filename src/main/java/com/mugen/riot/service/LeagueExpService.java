@@ -1,4 +1,4 @@
-package com.mugen.riot.api;
+package com.mugen.riot.service;
 
 import com.mugen.riot.model.league.LeagueEntry;
 import retrofit2.http.GET;
@@ -6,7 +6,7 @@ import retrofit2.http.Path;
 
 import java.util.Set;
 
-public interface LeagueExpApi {
+public interface LeagueExpService {
 
     @GET("/lol/league-exp/v4/entries/{queue}/{tier}/{division}")
     Set<LeagueEntry> getLeagueEntries(

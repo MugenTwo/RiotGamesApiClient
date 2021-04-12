@@ -1,11 +1,11 @@
-package com.mugen.riot.api;
+package com.mugen.riot.service;
 
 import com.mugen.riot.model.Summoner;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
-public interface SummonerApi {
+public interface SummonerService {
 
     @GET("/lol/summoner/v4/summoners/by-name/{summonerName}")
     Observable<Summoner> getByName(@Path("summonerName") String name);
