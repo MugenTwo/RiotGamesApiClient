@@ -1,11 +1,11 @@
-package com.mugen.riot.model;
+package com.mugen.riot.model.clash;
 
 import lombok.Builder;
 import lombok.Value;
 
 @Builder(toBuilder = true)
 @Value
-public class Player {
+public class ClashPlayer {
 
     String summonerId;
     String teamId;

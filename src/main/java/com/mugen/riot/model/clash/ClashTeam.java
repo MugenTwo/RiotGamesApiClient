@@ -1,6 +1,5 @@
 package com.mugen.riot.model.clash;
 
-import com.mugen.riot.model.Player;
 import lombok.Builder;
 import lombok.Value;
 
@@ -17,6 +16,6 @@ public class ClashTeam {
     String name;
     String captain;
     String abbreviation;
-    List<Player> players;
+    List<ClashPlayer> players;
 
 }

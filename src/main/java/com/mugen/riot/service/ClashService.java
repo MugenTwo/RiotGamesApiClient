@@ -1,7 +1,7 @@
 package com.mugen.riot.service;
 
 import com.mugen.riot.model.clash.ClashTeam;
-import com.mugen.riot.model.Player;
+import com.mugen.riot.model.clash.ClashPlayer;
 import com.mugen.riot.model.clash.Tournament;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -12,7 +12,7 @@ import java.util.List;
 public interface ClashService {
 
     @GET("/lol/clash/v1/players/by-summoner/{summonerId}")
-    Observable<List<Player>> getPlayerBySummonerId(@Path("summonerId") String summonerId);
+    Observable<List<ClashPlayer>> getPlayerBySummonerId(@Path("summonerId") String summonerId);
 
     @GET("/lol/clash/v1/teams/{teamId}")
     Observable<ClashTeam> getTeam(@Path("teamId") String teamId);
