@@ -4,6 +4,7 @@ import com.mugen.riot.route.Continent;
 import com.mugen.riot.route.Region;
 import com.mugen.riot.route.Route;
 import com.mugen.riot.service.AccountService;
+import com.mugen.riot.service.MatchService;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
@@ -25,7 +26,7 @@ public class RiotApiProvider {
 
     private static final String PROTOCOL_URL = "https://";
     private static final String LEAGUE_OF_LEGENDS_API_URL = ".api.riotgames.com";
-    private static final Set<Class<?>> continentApis = Set.of(AccountService.class);
+    private static final Set<Class<?>> continentApis = Set.of(AccountService.class, MatchService.class);
 
     @Getter
     @ToString.Exclude
